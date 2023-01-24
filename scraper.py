@@ -28,10 +28,13 @@ def scrape():
 
 
 if __name__ == '__main__':
+    testing = True
+    will_exit = False
+
     hours = 3
 
     arg_count = len(sys.argv)
-    if arg_count == 1: # No arguments
+    if arg_count == 1:  # No arguments
         print("No arguments given, using default value of 3 hours")
     else:
         try:
@@ -50,14 +53,15 @@ if __name__ == '__main__':
     while True:
         try:
             tmp = scrape()
-            if text != tmp:
+            if text != tmp or testing:
+                print("\a")
                 print("New job posting! Here's the text:")
                 print(tmp)
                 print("And here's the link: https://kingslanding.nb.ca/employment/")
                 print("Do you want to keep checking? (y/n): ", end="")
                 choice = input()
                 if choice == "n" or choice == "N":
-                    break
+                    will_exit = True
                 else:
                     text = tmp
         except urllib.error.URLError as err:
@@ -67,4 +71,7 @@ if __name__ == '__main__':
             print("An unknown error has occurred: {}".format(err))
 
         finally:
-            time.sleep(timer)
+            if will_exit:
+                exit(0)
+            else:
+                time.sleep(timer)
