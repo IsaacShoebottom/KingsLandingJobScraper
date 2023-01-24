@@ -1,6 +1,7 @@
 import time
 import urllib.request
 import urllib.error
+import sys
 
 from bs4 import BeautifulSoup
 
@@ -27,12 +28,24 @@ def scrape():
 
 
 if __name__ == '__main__':
+    hours = 3
+
+    arg_count = len(sys.argv)
+    if arg_count == 1: # No arguments
+        print("No arguments given, using default value of 3 hours")
+    else:
+        try:
+            hours = int(sys.argv[1])  # First argument is the script name, second is the first argument
+            print("Using argument value of " + str(hours) + " hours")
+        except ValueError:
+            print("Invalid argument given, using default value of 3 hours")
+
     # start = time.time()
 
     # 60 seconds * 60 minutes * 3 hours
-    timer = 60 * 60 * 3
+    timer = 60 * 60 * hours
     text = scrape()
-    print("Started checking for new jobs, will check every 3 hours.")
+    print("Started checking for new jobs")
 
     while True:
         try:
