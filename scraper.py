@@ -9,6 +9,11 @@ from bs4 import BeautifulSoup
 # Made for a friend with love
 # Tested with Python 3.10.7 on Windows 10
 
+# TODO: Look into using requests, urllib3, and/or selenium to scrape the page
+# https://pypi.org/project/selenium/
+# https://pypi.org/project/urllib3/
+# https://pypi.org/project/requests/
+
 def scrape():
     contents = urllib.request.urlopen("https://kingslanding.nb.ca/employment/").read()
     soup = BeautifulSoup(contents, "html.parser")
