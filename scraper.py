@@ -33,7 +33,7 @@ def scrape():
 
 
 if __name__ == '__main__':
-    testing = True
+    testing = False
     will_exit = False
 
     hours = 3
